@@ -17,6 +17,7 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class NewsSerializer(serializers.ModelSerializer):
+    category = CategorySerializer(read_only=True)
     class Meta:
         model = News
         fields = "__all__"
@@ -114,6 +115,11 @@ class SavolSerializer(serializers.ModelSerializer):
 class JavobSerializer(serializers.ModelSerializer):
     class Meta:
         model = Javob
+        fields = "__all__"
+
+class Savol_JavobSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Savol_Javob
         fields = "__all__"
 
 class Loyiha3Serializer(serializers.ModelSerializer):

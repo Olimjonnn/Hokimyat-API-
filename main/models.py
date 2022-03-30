@@ -1,22 +1,7 @@
 from email.mime import image
 from unicodedata import category
 from django.db import models
-from django.contrib.auth.models import AbstractUser
 
-class User(AbstractUser):
-    type = models.IntegerField(choices=(
-        (1, 'worker'),
-        (2, 'user'),
-    ), default=2)
-    phone = models.IntegerField(null=True, blank=True)
-
-    def __str__(self):
-        return self.username
-    
-    class Meta(AbstractUser.Meta):
-        swappable = 'AUTH_USER_MODEL'
-        verbose_name = 'User'
-        verbose_name_plural = 'Users'
         
 class Slider(models.Model):
     image = models.ImageField(upload_to="Slider/")
@@ -121,7 +106,7 @@ class InvsTarmoqlar(models.Model):
     text = models.CharField(max_length=300)
 
 class Hujjat(models.Model):
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, blank=True, null=True)
     image = models.ImageField(upload_to="Hujjat/")
     link = models.CharField(max_length=400)
 
@@ -137,6 +122,11 @@ class Savol(models.Model):
 class Javob(models.Model):
     savol = models.ForeignKey(Savol, on_delete=models.CASCADE)
     javob = models.CharField(max_length=200)
+    def __str__(self):
+        return self.javob
+
+class Savol_Javob(models.Model):
+    jovoblar = models.ManyToManyField(Javob, blank=True)
 
 class Loyiha3(models.Model):
     image = models.ImageField(upload_to="Loyiha3/")

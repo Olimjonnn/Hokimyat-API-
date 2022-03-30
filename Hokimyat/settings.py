@@ -38,9 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
-    'rest_framework',
-    'rest_framework.authtoken'
-]
+    'rest_framework',]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -69,7 +67,6 @@ TEMPLATES = [
         },
     },
 ]
-AUTH_USER_MODEL = 'main.User'
 WSGI_APPLICATION = 'Hokimyat.wsgi.application'
 
 
