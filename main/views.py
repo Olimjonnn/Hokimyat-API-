@@ -267,34 +267,29 @@ class JavobView(viewsets.ModelViewSet):
         try:
             savol_id = request.data['savol']
             javob = request.data['javob']
-            Javob.objects.create(savol_id=savol_id, javob=javob)
+            tick = request.data['tick']
+            Javob.objects.create(tick=tick, savol_id=savol_id, javob=javob)
             return Response({"Added"})
         except Exception as ar:
             data = {
                 "error": f"{ar}"
             }
             return Response(data)
-            
-
-class Savol_JavobView(viewsets.ModelViewSet):
-    queryset = Savol_Javob.objects.all()
-    serializer_class = Savol_JavobSerializer
-
-    def create(self, request):
-        try:
-            jovoblar = request.POST.get("jovoblar")
-            a = Savol_Javob.objects.create(jovoblar=jovoblar)
-            for i in jovoblar:
-                javob = Javob.objects.get(id=i)
-                a.jovoblar.add(javob)
-                a.save()
-            return Response({"Added"})
-             
-        except Exception as arr:
-            data = {
-                'error': f"{arr}"
-            }
-            return Response(data)
+        
+    @action(['GET'], detail=False)
+    def answer(self, request):
+        savol = request.GET.get("savol")
+        javob = Javob.objects.filter(savol_id=savol, tick=True)
+        java = JavobSerializer(javob, many=True)
+        return Response(java.data)
+    
+    @action(['GET'], detail=False)
+    def sss(self, request):
+        st_id = request.GET.get("st_id")
+        end_id = request.GET.get("end_id")
+        jab = Javob.objects.filter(id__gte=st_id, id__lte=end_id)
+        jaav = JavobSerializer(jab, many=True)
+        return Response(jaav.data) 
 
 class Loyiha3View(viewsets.ModelViewSet):
     queryset = Loyiha3.objects.all()

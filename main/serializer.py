@@ -117,10 +117,6 @@ class JavobSerializer(serializers.ModelSerializer):
         model = Javob
         fields = "__all__"
 
-class Savol_JavobSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Savol_Javob
-        fields = "__all__"
 
 class Loyiha3Serializer(serializers.ModelSerializer):
     class Meta:

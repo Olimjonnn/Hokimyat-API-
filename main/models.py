@@ -122,11 +122,10 @@ class Savol(models.Model):
 class Javob(models.Model):
     savol = models.ForeignKey(Savol, on_delete=models.CASCADE)
     javob = models.CharField(max_length=200)
+    tick = models.BooleanField(default=False)
     def __str__(self):
         return self.javob
 
-class Savol_Javob(models.Model):
-    jovoblar = models.ManyToManyField(Javob, blank=True)
 
 class Loyiha3(models.Model):
     image = models.ImageField(upload_to="Loyiha3/")
